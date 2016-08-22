@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 
-const Pixel = ({ onMouseOver, color }) => (
+const Pixel = ({ onMouseOver, onClick, color }) => (
   <div
+    onClick={onClick}
     onMouseOver={onMouseOver}
     style={{
       backgroundColor: color,
-      height: '15px',
-      width: '15px',
+      height: '20px',
+      width: '20px',
       margin: '0',
     }}
   />
@@ -14,6 +15,7 @@ const Pixel = ({ onMouseOver, color }) => (
 
 Pixel.propTypes = {
   onMouseOver: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
 };
 

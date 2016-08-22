@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Pixel from './Pixel';
-import { paintPixel, startPainting, stopPainting } from '../actions/index';
+import { paintPixel, floodFillPixel, startPainting, stopPainting } from '../actions/index';
 
-const Canvas = ({ grid, handleMouseOver, handleMouseDown, handleMouseUp }) => {
+const Canvas = ({ grid, handleMouseOver, handleMouseDown, handleMouseUp, handleClick }) => {
   const pixels = grid.map((row, r) => {
     const pixelRow = row.map((color, c) => (
-      <Pixel key={`r${r}c${c}`} color={color} onMouseOver={() => handleMouseOver(r, c)} />
+      <Pixel
+        key={`r${r}c${c}`}
+        color={color}
+        onClick={() => handleClick(r, c)}
+        onMouseOver={() => handleMouseOver(r, c)}
+      />
     ));
     return <div>{pixelRow}</div>;
   });
@@ -27,6 +32,7 @@ Canvas.propTypes = {
   handleMouseOver: PropTypes.func.isRequired,
   handleMouseDown: PropTypes.func.isRequired,
   handleMouseUp: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -37,6 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleMouseOver: (row, col) => dispatch(paintPixel(row, col)),
   handleMouseDown: () => dispatch(startPainting()),
   handleMouseUp: () => dispatch(stopPainting()),
+  handleClick: (row, col) => dispatch(floodFillPixel(row, col)),
 });
 
 const CanvasContainer = connect(
