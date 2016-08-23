@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Pixel from './Pixel';
 import { paintPixel, floodFillPixel, startPainting, stopPainting } from '../actions/index';
 
-const Canvas = ({ grid, handleMouseOver, handleMouseDown, handleMouseUp, handleClick }) => {
-  const pixels = grid.map((row, r) => {
+const Canvas = ({ canvas, handleMouseOver, handleMouseDown, handleMouseUp, handleClick }) => {
+  const pixels = canvas.map((row, r) => {
     const pixelRow = row.map((color, c) => (
       <Pixel
         key={`r${r}c${c}`}
@@ -28,7 +28,7 @@ const Canvas = ({ grid, handleMouseOver, handleMouseDown, handleMouseUp, handleC
 };
 
 Canvas.propTypes = {
-  grid: PropTypes.array.isRequired,
+  canvas: PropTypes.array.isRequired,
   handleMouseOver: PropTypes.func.isRequired,
   handleMouseDown: PropTypes.func.isRequired,
   handleMouseUp: PropTypes.func.isRequired,
@@ -36,7 +36,7 @@ Canvas.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  grid: state.grid,
+  canvas: state.canvas,
 });
 
 const mapDispatchToProps = (dispatch) => ({
