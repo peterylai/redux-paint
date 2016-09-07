@@ -1,3 +1,7 @@
+## Redux Paint
+
+Fiddling around with Redux and React. Came across a coding challenge to implement a "flood-fill" feature and thought it would be fun to implement an interface for it.
+
 ##Setup
 
 ```
